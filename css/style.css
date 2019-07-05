@@ -179,6 +179,14 @@ body {
 	.boxed-long #header.sticky-menu.fixed {
 		border-top:none;
 	}
+
+	.navbar-brand img {
+		margin-top: 25px;
+	}
+
+	.sticky-menu.fixed .navbar-brand img {
+		margin-top: 0 !important;
+	}
 }
 
 
@@ -6327,7 +6335,7 @@ Animations - add these clases to the parent element - Navbar Or dropdown
 /* You shuld use this page header largest 
 or the section with padding top more than header's height */
 .navbar-transparent {
-	background-color: transparent !important;
+	background: rgba(0, 0, 0, 0.5);
 	position: absolute;
 	top:0;
 	left:0;
