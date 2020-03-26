@@ -102,6 +102,9 @@
                                 <li>
                                     <a href="#contact">Contact</a>
                                 </li>
+                                <li>
+                                    <a href="#payment">Make Payment</a>
+                                </li>
                             </ul>
                         </div><!-- /.navbar-collapse -->
                     </div><!-- /.container -->
@@ -589,6 +592,19 @@
                     </div><!-- End .row -->
                 </div><!-- End .container -->
             </div><!-- End .bg-lighetgray -->
+            <div class="callout custom no-border" style="margin-bottom: 0;">
+                <div class="mb5"></div><!-- space -->
+                <div class="container">
+                    <div class="callout-wrapper">
+                        <div class="callout-left">
+                            <h2 class="callout-title">Make A Payment</h2>
+                        </div><!-- End .callout-left -->
+                        <div class="callout-right">
+                            <div id="paypal-button-container"></div>
+                        </div><!-- End .callout-right -->
+                    </div><!-- End .callout-wrapper -->
+                </div><!-- End .container -->
+            </div><!-- End .callout -->
         </div><!-- End #content -->
 
         <footer id="footer" class="footer-custom" role="contentinfo">
@@ -601,6 +617,7 @@
                                 <li><a href="#about">About Us</a></li>
                                 <li><a href="#portfolio-item-container">Our Homes</a></li>
                                 <li><a href="#contact">Contact</a></li>
+                                <li><img src="images/narr.png" style="height: 80px;"></li>
                             </ul>
                         </div><!-- End .col-md-6 -->
                         <div class="col-md-6 col-md-pull-6">
@@ -653,6 +670,7 @@
     <script src="js/contact.js"></script>
     <script src="js/main.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155252067-1"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD" data-sdk-integration-source="button-factory"></script>
 
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -676,6 +694,30 @@
                 soloArrowRightHOffset: 20
             });
         }());
+
+        paypal.Buttons({
+            style: {
+                shape: 'rect',
+                color: 'gold',
+                layout: 'vertical',
+                label: 'paypal',
+                
+            },
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '0'
+                        }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                });
+            }
+        }).render('#paypal-button-container');
     </script>
 
 
